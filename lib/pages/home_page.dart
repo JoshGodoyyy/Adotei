@@ -3,6 +3,7 @@ import 'package:adotei/custom_colors.dart';
 import 'package:adotei/custom_icons.dart';
 import 'package:adotei/gender.dart';
 import 'package:adotei/widgets/list_item.dart';
+import 'package:adotei/widgets/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,90 +15,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isCatSelected = false;
+  bool isDogSelected = false;
+  bool fishballcat = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        backgroundColor: CustomColors.backgroundWhite,
-        child: Column(
-          children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                color: CustomColors.green,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: const [
-                  Text(
-                    'Josh Godoy',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: CustomColors.backgroundWhite,
-                    ),
-                  ),
-                  Text(
-                    'email@email.com.br',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                      color: CustomColors.backgroundWhite,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text(
-                'Configurações',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              onTap: () {
-                Navigator.of(context).pop(const Drawer());
-                Navigator.of(context).pushNamed('/add');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.phone),
-              title: const Text(
-                'Fale conosco',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.question_mark),
-              title: const Text(
-                'Ajuda',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              onTap: () {},
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: Divider(),
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text(
-                'Sair',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: CustomColors.green),
         backgroundColor: CustomColors.white,
@@ -146,7 +70,7 @@ class _HomePageState extends State<HomePage> {
               topLeft: Radius.circular(15),
               topRight: Radius.circular(15),
             ),
-            color: CustomColors.backgroundWhite),
+            color: CustomColors.background),
         child: Column(
           children: [
             const Padding(
@@ -162,74 +86,71 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: CustomColors.white,
-                      ),
-                      child: SvgPicture.asset(
-                        CustomIcons.cat,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: CustomColors.white,
-                      ),
-                      child: SvgPicture.asset(
-                        CustomIcons.dog,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: CustomColors.white,
-                      ),
-                      child: const Icon(
-                        Icons.more_horiz,
-                        size: 35,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
             Flexible(
               child: ListView(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                children: const [
-                  ListItem(
-                      animal: Animal.cat,
-                      name: 'Gatinho',
-                      gender: Gender.male,
-                      description: 'Gatinho bonitinho, muito fofo... sério',
-                      age: 1),
-                  ListItem(
-                      animal: Animal.dog,
-                      name: 'Caramelo',
-                      gender: Gender.male,
-                      description:
-                          'Apesar de ser cachorro ele se dá bem com gatos :)',
-                      age: 2),
+                //padding: const EdgeInsets.symmetric(vertical: 10),
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isCatSelected = !isCatSelected;
+                          });
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: isCatSelected
+                                ? Colors.grey
+                                : CustomColors.green,
+                          ),
+                          child: SvgPicture.asset(
+                            CustomIcons.cat,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isDogSelected = !isDogSelected;
+                          });
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: isDogSelected
+                                  ? CustomColors.blue
+                                  : CustomColors.green),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            fishballcat = !fishballcat;
+                          });
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: fishballcat
+                                  ? CustomColors.white
+                                  : CustomColors.green),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ListItem(),
                 ],
               ),
             ),
