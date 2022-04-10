@@ -78,6 +78,19 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
+            leading: const Icon(Icons.info_outlined),
+            title: const Text(
+              'Sobre',
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context).pop(const Drawer());
+              Navigator.of(context).pushNamed('/about');
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.logout),
             title: const Text(
               'Sair',

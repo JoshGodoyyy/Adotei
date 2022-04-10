@@ -68,117 +68,118 @@ class _AddPetState extends State<AddPet> {
             ),
             color: CustomColors.background,
           ),
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                buildTextField('Nome', 10, 1, nameController),
-                Row(
-                  children: [
-                    const Text('Idade'),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    ElevatedButton(
-                      style:
-                          ElevatedButton.styleFrom(primary: CustomColors.green),
-                      onPressed: () {
-                        minorAge ? null : decreaseAge();
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Icon(Icons.remove),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        enabled: false,
-                        keyboardType: TextInputType.number,
-                        controller: ageController,
-                        decoration: const InputDecoration(
-                          border:
-                              OutlineInputBorder(borderSide: BorderSide.none),
-                          fillColor: CustomColors.white,
-                          filled: true,
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                      style:
-                          ElevatedButton.styleFrom(primary: CustomColors.green),
-                      onPressed: () {
-                        addAge();
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Icon(Icons.add),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Text('Sexo'),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Row(
-                      children: [
-                        Radio<Gender>(
-                          value: Gender.male,
-                          groupValue: _gender,
-                          onChanged: (Gender? value) {
-                            setState(() {
-                              _gender = value;
-                            });
-                          },
-                        ),
-                        const Text('Macho')
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Radio<Gender>(
-                          value: Gender.female,
-                          groupValue: _gender,
-                          onChanged: (Gender? value) {
-                            setState(() {
-                              _gender = value;
-                            });
-                          },
-                        ),
-                        const Text('Fêmea')
-                      ],
-                    ),
-                  ],
-                ),
-                buildTextField('Descrição', 300, 10, descriptionController),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: ElevatedButton(
+          child: ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              buildTextField('Nome', 10, 1, nameController),
+              Row(
+                children: [
+                  const Text('Idade'),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: minorAge
+                            ? CustomColors.brown
+                            : CustomColors.darkBrown),
                     onPressed: () {
-                      String name = nameController.text;
-                      String description = descriptionController.text;
-
-                      if (name.isEmpty || description.isEmpty) {
-                        setState(() {
-                          errorText = 'Este campo deve ser preenchido';
-                        });
-                        return;
-                      }
-                      setState(() {
-                        errorText = null;
-                      });
+                      minorAge ? null : decreaseAge();
                     },
                     child: const Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: Text('Salvar'),
+                      padding: EdgeInsets.all(16.0),
+                      child: Icon(Icons.remove),
                     ),
-                    style: ElevatedButton.styleFrom(primary: CustomColors.blue),
                   ),
-                )
-              ],
-            ),
+                  Expanded(
+                    child: TextField(
+                      enabled: false,
+                      keyboardType: TextInputType.number,
+                      controller: ageController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                        fillColor: CustomColors.white,
+                        filled: true,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: CustomColors.darkBrown),
+                    onPressed: () {
+                      addAge();
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Icon(Icons.add),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text('Sexo'),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Row(
+                    children: [
+                      Radio<Gender>(
+                        activeColor: CustomColors.darkBrown,
+                        value: Gender.male,
+                        groupValue: _gender,
+                        onChanged: (Gender? value) {
+                          setState(() {
+                            _gender = value;
+                          });
+                        },
+                      ),
+                      const Text('Macho')
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio<Gender>(
+                        activeColor: CustomColors.darkBrown,
+                        value: Gender.female,
+                        groupValue: _gender,
+                        onChanged: (Gender? value) {
+                          setState(() {
+                            _gender = value;
+                          });
+                        },
+                      ),
+                      const Text('Fêmea')
+                    ],
+                  ),
+                ],
+              ),
+              buildTextField('Descrição', 300, 10, descriptionController),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    String name = nameController.text;
+                    String description = descriptionController.text;
+
+                    if (name.isEmpty || description.isEmpty) {
+                      setState(() {
+                        errorText = 'Este campo deve ser preenchido';
+                      });
+                      return;
+                    }
+                    setState(() {
+                      errorText = null;
+                    });
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text('Salvar'),
+                  ),
+                  style: ElevatedButton.styleFrom(primary: CustomColors.blue),
+                ),
+              )
+            ],
           ),
         ),
       ),

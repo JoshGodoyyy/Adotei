@@ -4,6 +4,7 @@ import 'package:adotei/custom_icons.dart';
 import 'package:adotei/gender.dart';
 import 'package:adotei/widgets/list_item.dart';
 import 'package:adotei/widgets/my_drawer.dart';
+import 'package:adotei/widgets/pet_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -72,6 +73,7 @@ class _HomePageState extends State<HomePage> {
             ),
             color: CustomColors.background),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
               padding: EdgeInsets.all(20.0),
@@ -86,71 +88,50 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            const Padding(
+              padding: EdgeInsets.only(left: 20, bottom: 20),
+              child: Text(
+                'Estou procurando por:',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                PetButton(
+                  title: 'Gato',
+                  icon: CustomIcons.cat,
+                ),
+                PetButton(
+                  title: 'Cachorro',
+                  icon: CustomIcons.dog,
+                ),
+                PetButton(
+                  title: 'Todos',
+                  icon: CustomIcons.pawprint,
+                ),
+              ],
+            ),
             Flexible(
               child: ListView(
                 //padding: const EdgeInsets.symmetric(vertical: 10),
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isCatSelected = !isCatSelected;
-                          });
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: isCatSelected
-                                ? Colors.grey
-                                : CustomColors.green,
-                          ),
-                          child: SvgPicture.asset(
-                            CustomIcons.cat,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isDogSelected = !isDogSelected;
-                          });
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: isDogSelected
-                                  ? CustomColors.blue
-                                  : CustomColors.green),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            fishballcat = !fishballcat;
-                          });
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: fishballcat
-                                  ? CustomColors.white
-                                  : CustomColors.green),
-                        ),
-                      ),
-                    ],
+                  ListItem(
+                    animal: Animal.cat,
+                    name: 'Louie',
+                    age: 1,
+                    gender: Gender.male,
+                    description:
+                        'Descrição do bichano, seu temperamento é daora... gato top esse, até declara imposto de renda :)',
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  ListItem(),
+                  ListItem(
+                    animal: Animal.dog,
+                    name: 'Aslam',
+                    age: 2,
+                    gender: Gender.male,
+                    description:
+                        'Cachorro e é isso, ao contrário do gato, ele sabe sonegar impostos e é isso... To sem criatividade',
+                  )
                 ],
               ),
             ),

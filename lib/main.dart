@@ -1,3 +1,4 @@
+import 'package:adotei/pages/about.dart';
 import 'package:adotei/pages/add_pet.dart';
 import 'package:adotei/pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const HomePage(),
         '/add': (context) => const AddPet(),
+        '/about': (context) => const About(),
       },
     );
   }
