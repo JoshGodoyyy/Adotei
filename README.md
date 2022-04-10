@@ -4,10 +4,12 @@
 ![Homepage](https://raw.githubusercontent.com/JoshGodoyyy/Adotei/master/screenshots/Main.png)
 
 ### Drawer
-![Homepage](https://raw.githubusercontent.com/JoshGodoyyy/Adotei/master/screenshots/Drawer.png)
+![Drawer](https://raw.githubusercontent.com/JoshGodoyyy/Adotei/master/screenshots/Drawer.png)
 
 ### Novo Pet
-![Homepage](https://raw.githubusercontent.com/JoshGodoyyy/Adotei/master/screenshots/New.png)
+![NewPet](https://raw.githubusercontent.com/JoshGodoyyy/Adotei/master/screenshots/New.png)
+### Classificação Pet
+![ClassificationPet](https://raw.githubusercontent.com/JoshGodoyyy/Adotei/master/screenshots/SelectPet.png)
 
 ### Sobre
-![Homepage](https://raw.githubusercontent.com/JoshGodoyyy/Adotei/master/screenshots/About.png)
+![About](https://raw.githubusercontent.com/JoshGodoyyy/Adotei/master/screenshots/About.png)

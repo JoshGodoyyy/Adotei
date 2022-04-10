@@ -114,19 +114,18 @@ class _HomePageState extends State<HomePage> {
             ),
             Flexible(
               child: ListView(
-                //padding: const EdgeInsets.symmetric(vertical: 10),
-                children: [
+                children: const [
                   ListItem(
                     animal: Animal.cat,
                     name: 'Louie',
                     age: 1,
                     gender: Gender.male,
                     description:
-                        'Descrição do bichano, seu temperamento é daora... gato top esse, até declara imposto de renda :)',
+                        'Esse é o gato mais top que você vai ver em toda sua vida, sabe até declarar imposto de renda',
                   ),
                   ListItem(
                     animal: Animal.dog,
-                    name: 'Aslam',
+                    name: 'Muris',
                     age: 2,
                     gender: Gender.male,
                     description:

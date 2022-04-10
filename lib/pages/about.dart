@@ -2,7 +2,6 @@ import 'package:adotei/custom_colors.dart';
 import 'package:adotei/custom_icons.dart';
 import 'package:adotei/widgets/list_about.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class About extends StatelessWidget {
   const About({Key? key}) : super(key: key);

@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ListItem extends StatefulWidget {
-  ListItem(
-      {Key? key,
-      required this.animal,
-      required this.name,
-      required this.age,
-      required this.gender,
-      required this.description})
-      : super(key: key);
+  const ListItem({
+    Key? key,
+    required this.animal,
+    required this.name,
+    required this.age,
+    required this.gender,
+    required this.description,
+  }) : super(key: key);
   final Animal animal;
   final String name;
   final int age;
@@ -65,7 +65,7 @@ class _ListItemState extends State<ListItem> {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 3,
                 blurRadius: 7,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               )
             ],
           ),
@@ -125,6 +125,15 @@ class _ListItemState extends State<ListItem> {
                           fontSize: 13,
                         ),
                       ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/pet');
+                        },
+                        child: const Text('Ver mais'),
+                        style: ElevatedButton.styleFrom(
+                          primary: CustomColors.blue,
+                        ),
+                      )
                     ],
                   ),
                 ),
