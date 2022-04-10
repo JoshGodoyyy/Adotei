@@ -45,7 +45,7 @@ class ItemAbout extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 16),
                     ),
                     Text(
                       subtitle,

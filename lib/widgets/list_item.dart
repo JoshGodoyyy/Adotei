@@ -84,7 +84,7 @@ class _ListItemState extends State<ListItem> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: SvgPicture.asset(CustomIcons.pawprint),
+                    child: SvgPicture.asset(animals()),
                   ),
                 ),
               ),

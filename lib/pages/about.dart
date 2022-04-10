@@ -33,7 +33,7 @@ class About extends StatelessWidget {
           color: CustomColors.background,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Flexible(
               child: ListView(
@@ -79,6 +79,7 @@ class About extends StatelessWidget {
                 ],
               ),
             ),
+            const Text('App desenvolvido em Flutter. Feito com <3')
           ],
         ),
       ),
