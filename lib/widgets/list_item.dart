@@ -2,23 +2,17 @@ import 'package:adotei/custom_colors.dart';
 import 'package:adotei/custom_icons.dart';
 import 'package:adotei/gender.dart';
 import 'package:adotei/animal.dart';
+import 'package:adotei/model/animal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ListItem extends StatefulWidget {
-  const ListItem({
+  const ListItem(
+    this.myanimal, {
     Key? key,
-    required this.animal,
-    required this.name,
-    required this.age,
-    required this.gender,
-    required this.description,
   }) : super(key: key);
-  final Animal animal;
-  final String name;
-  final int age;
-  final Gender gender;
-  final String description;
+
+  final MyAnimal myanimal;
 
   @override
   State<ListItem> createState() => _ListItemState();
@@ -32,21 +26,21 @@ class _ListItemState extends State<ListItem> {
     return width;
   }
 
-  String animals() {
-    if (widget.animal == Animal.cat) {
-      return CustomIcons.cat;
-    } else {
-      return CustomIcons.dog;
-    }
-  }
+  // String animals() {
+  //   if (widget.myAnimal == Animal.cat) {
+  //     return CustomIcons.cat;
+  //   } else {
+  //     return CustomIcons.dog;
+  //   }
+  // }
 
-  String genders() {
-    if (widget.gender == Gender.male) {
-      return CustomIcons.male;
-    } else {
-      return CustomIcons.female;
-    }
-  }
+  // String genders() {
+  //   if (widget.gender == Gender.male) {
+  //     return CustomIcons.male;
+  //   } else {
+  //     return CustomIcons.female;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +78,7 @@ class _ListItemState extends State<ListItem> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: SvgPicture.asset(animals()),
+                    child: SvgPicture.asset(CustomIcons.cat),
                   ),
                 ),
               ),
@@ -96,7 +90,7 @@ class _ListItemState extends State<ListItem> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        widget.name,
+                        widget.myanimal.name,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -108,11 +102,11 @@ class _ListItemState extends State<ListItem> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              '${widget.age} ano(s)',
+                              '${widget.myanimal.age} ano(s)',
                               style: const TextStyle(fontSize: 13),
                             ),
                             SvgPicture.asset(
-                              genders(),
+                              CustomIcons.male,
                               width: 13,
                             )
                           ],
@@ -120,14 +114,15 @@ class _ListItemState extends State<ListItem> {
                       ),
                       Expanded(child: Container()),
                       Text(
-                        widget.description,
+                        widget.myanimal.description,
                         style: const TextStyle(
                           fontSize: 13,
                         ),
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed('/pet');
+                          Navigator.of(context)
+                              .pushNamed('/pet', arguments: widget.myanimal);
                         },
                         child: const Text('Ver mais'),
                         style: ElevatedButton.styleFrom(

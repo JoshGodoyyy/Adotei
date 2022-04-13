@@ -6,12 +6,12 @@ class MyAnimal {
   String gender;
   String description;
 
-  MyAnimal({
-    required this.id,
-    required this.animal,
-    required this.name,
-    required this.age,
-    required this.gender,
-    required this.description,
-  });
+  MyAnimal(
+    this.id,
+    this.animal,
+    this.name,
+    this.age,
+    this.gender,
+    this.description,
+  );
 }

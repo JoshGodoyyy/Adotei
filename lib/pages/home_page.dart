@@ -2,6 +2,7 @@ import 'package:adotei/animal.dart';
 import 'package:adotei/custom_colors.dart';
 import 'package:adotei/custom_icons.dart';
 import 'package:adotei/gender.dart';
+import 'package:adotei/model/animal.dart';
 import 'package:adotei/widgets/list_item.dart';
 import 'package:adotei/widgets/my_drawer.dart';
 import 'package:adotei/widgets/pet_button.dart';
@@ -16,9 +17,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isCatSelected = false;
-  bool isDogSelected = false;
-  bool fishballcat = false;
+  final bool _isCatActive = false;
+  final bool _isDogActive = false;
+  final bool _isAllActive = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,14 +56,16 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: SvgPicture.asset(
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/add');
+            },
+            icon: SvgPicture.asset(
               CustomIcons.pawprint,
               color: CustomColors.green,
               width: 20,
             ),
-          )
+          ),
         ],
       ),
       backgroundColor: CustomColors.white,
@@ -95,43 +99,32 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                PetButton(
-                  title: 'Gato',
-                  icon: CustomIcons.cat,
-                ),
-                PetButton(
-                  title: 'Cachorro',
-                  icon: CustomIcons.dog,
-                ),
-                PetButton(
-                  title: 'Todos',
-                  icon: CustomIcons.pawprint,
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  PetButton(
+                    _isCatActive,
+                    title: 'Gato',
+                    icon: CustomIcons.cat,
+                  ),
+                  PetButton(
+                    _isDogActive,
+                    title: 'Cachorro',
+                    icon: CustomIcons.dog,
+                  ),
+                  PetButton(
+                    _isAllActive,
+                    title: 'Todos',
+                    icon: CustomIcons.pawprint,
+                  ),
+                ],
+              ),
             ),
             Flexible(
               child: ListView(
-                children: const [
-                  ListItem(
-                    animal: Animal.cat,
-                    name: 'Louie',
-                    age: 1,
-                    gender: Gender.male,
-                    description:
-                        'Esse é o gato mais top que você vai ver em toda sua vida, sabe até declarar imposto de renda',
-                  ),
-                  ListItem(
-                    animal: Animal.dog,
-                    name: 'Muris',
-                    age: 2,
-                    gender: Gender.male,
-                    description:
-                        'Cachorro e é isso, ao contrário do gato, ele sabe sonegar impostos e é isso... To sem criatividade',
-                  )
-                ],
+                children: const [],
               ),
             ),
           ],

@@ -47,6 +47,8 @@ class _AddPetState extends State<AddPet> {
   Animal? _animal;
   String? textButton = 'Classificação';
 
+  List<MyAnimal> animal = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -296,13 +298,15 @@ class _AddPetState extends State<AddPet> {
                     }
 
                     MyAnimal myanimal = MyAnimal(
-                      id: 1,
-                      animal: animal,
-                      name: name,
-                      age: age,
-                      gender: gender,
-                      description: description,
+                      1,
+                      animal,
+                      name,
+                      age,
+                      gender,
+                      description,
                     );
+
+                    this.animal.add(myanimal);
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(15.0),

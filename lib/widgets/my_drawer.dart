@@ -48,7 +48,6 @@ class CustomDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.of(context).pop(const Drawer());
-              Navigator.of(context).pushNamed('/add');
             },
           ),
           ListTile(
@@ -69,7 +68,9 @@ class CustomDrawer extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop(const Drawer());
+            },
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -98,7 +99,10 @@ class CustomDrawer extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop(const Drawer());
+              Navigator.of(context).pushReplacementNamed('/login');
+            },
           ),
         ],
       ),
