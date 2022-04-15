@@ -1,9 +1,12 @@
+import 'package:adotei/animal.dart';
+import 'package:adotei/gender.dart';
+
 class MyAnimal {
   int id;
-  String animal;
+  Animal animal;
   String name;
   int age;
-  String gender;
+  Gender gender;
   String description;
 
   MyAnimal(

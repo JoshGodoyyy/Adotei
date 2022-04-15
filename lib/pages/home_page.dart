@@ -1,8 +1,8 @@
-import 'package:adotei/animal.dart';
+import 'package:adotei/app_controller.dart';
 import 'package:adotei/custom_colors.dart';
 import 'package:adotei/custom_icons.dart';
-import 'package:adotei/gender.dart';
 import 'package:adotei/model/animal.dart';
+import 'package:adotei/widgets/button_filter.dart';
 import 'package:adotei/widgets/list_item.dart';
 import 'package:adotei/widgets/my_drawer.dart';
 import 'package:adotei/widgets/pet_button.dart';
@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+  HomePage({Key? key}) : super(key: key);
+  List<MyAnimal> animals = [];
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -20,6 +20,9 @@ class _HomePageState extends State<HomePage> {
   final bool _isCatActive = false;
   final bool _isDogActive = false;
   final bool _isAllActive = true;
+
+  final bool _male = false;
+  final bool _female = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +60,20 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/add');
-            },
+            onPressed: () => Navigator.pushNamed(context, '/add'),
             icon: SvgPicture.asset(
               CustomIcons.pawprint,
               color: CustomColors.green,
               width: 20,
             ),
+          ),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                widget.animals = AppController.getInstance.animal;
+              });
+            },
+            icon: const Icon(Icons.refresh),
           ),
         ],
       ),
@@ -80,51 +89,58 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(borderSide: BorderSide.none),
-                  prefixIcon: Icon(Icons.search),
-                  suffixIconColor: CustomColors.green,
-                  hintText: 'Procurar',
-                  fillColor: CustomColors.white,
-                  filled: true,
-                ),
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, bottom: 20),
+              padding: EdgeInsets.all(20),
               child: Text(
                 'Estou procurando por:',
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                PetButton(
+                  _isCatActive,
+                  title: 'Gato',
+                  icon: CustomIcons.cat,
+                ),
+                PetButton(
+                  _isDogActive,
+                  title: 'Cachorro',
+                  icon: CustomIcons.dog,
+                ),
+                PetButton(
+                  _isAllActive,
+                  title: 'Todos',
+                  icon: CustomIcons.pawprint,
+                ),
+              ],
+            ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  PetButton(
-                    _isCatActive,
-                    title: 'Gato',
-                    icon: CustomIcons.cat,
+                  const Text(
+                    'Filtros',
+                    style: TextStyle(fontWeight: FontWeight.w600),
                   ),
-                  PetButton(
-                    _isDogActive,
-                    title: 'Cachorro',
-                    icon: CustomIcons.dog,
-                  ),
-                  PetButton(
-                    _isAllActive,
-                    title: 'Todos',
-                    icon: CustomIcons.pawprint,
-                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      FilterButton(_male, title: 'Macho'),
+                      FilterButton(_female, title: 'Fêmea'),
+                    ],
+                  )
                 ],
               ),
             ),
             Flexible(
               child: ListView(
-                children: const [],
+                children: [
+                  for (MyAnimal i in AppController.getInstance.animal)
+                    ListItem(myAnimal: i),
+                ],
               ),
             ),
           ],

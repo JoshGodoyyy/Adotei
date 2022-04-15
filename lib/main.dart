@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (setting) {
         switch (setting.name) {
           case '/':
-            return MaterialPageRoute(builder: (context) => const HomePage());
+            return MaterialPageRoute(builder: (context) => HomePage());
           case '/add':
             return MaterialPageRoute(builder: (context) => const AddPet());
           case '/pet':

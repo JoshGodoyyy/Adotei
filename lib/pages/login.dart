@@ -12,51 +12,71 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.green,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Flexible(flex: 1, child: Container()),
-          Flexible(
-            flex: 2,
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
-                color: CustomColors.background,
+      backgroundColor: CustomColors.background,
+      body: SafeArea(
+        child: Center(
+          child: Container(
+            margin: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.6),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.6),
+                  offset: const Offset(5, 5),
+                  blurRadius: 15,
+                  spreadRadius: 10,
+                ),
+              ],
+            ),
+            child: ListView(
+              padding: const EdgeInsets.all(15),
+              shrinkWrap: true,
+              children: [
+                const Text(
+                  'Faça o login para continuar',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                buildTextField('Usuario', false),
+                buildTextField('Senha', true),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    buildTextField('Usuário', false),
-                    buildTextField('Senha', true),
-                    const SizedBox(
-                      height: 10,
+                    TextButton(
+                        onPressed: () {}, child: const Text('Registre-se')),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Esqueci a senha'),
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pushReplacementNamed('/');
-                        },
-                        child: const Text('Entrar'),
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(14),
-                          primary: CustomColors.blue,
-                        ),
-                      ),
-                    )
                   ],
                 ),
-              ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacementNamed('/');
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text('Entrar'),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: CustomColors.blue,
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

@@ -1,5 +1,7 @@
+import 'package:adotei/animal.dart';
 import 'package:adotei/custom_colors.dart';
 import 'package:adotei/custom_icons.dart';
+import 'package:adotei/gender.dart';
 import 'package:adotei/model/animal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,6 +13,22 @@ class Pet extends StatelessWidget {
   }) : super(key: key);
 
   final MyAnimal myAnimal;
+
+  String icon() {
+    if (myAnimal.animal == Animal.dog) {
+      return CustomIcons.dog;
+    } else {
+      return CustomIcons.cat;
+    }
+  }
+
+  String gender() {
+    if (myAnimal.gender == Gender.male) {
+      return 'Macho';
+    } else {
+      return 'Fêmea';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +45,7 @@ class Pet extends StatelessWidget {
         children: [
           Flexible(
             flex: 2,
-            child: SvgPicture.asset(CustomIcons.cat),
+            child: SvgPicture.asset(icon()),
           ),
           Flexible(
             flex: 2,
@@ -50,7 +68,7 @@ class Pet extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      'Tenho ${myAnimal.age} anos, sou ${myAnimal.gender}',
+                      'Tenho ${myAnimal.age} anos, sou ${gender()}',
                       style: const TextStyle(fontSize: 14),
                     ),
                     const SizedBox(height: 20),

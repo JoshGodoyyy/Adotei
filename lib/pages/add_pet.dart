@@ -1,4 +1,5 @@
 import 'package:adotei/animal.dart';
+import 'package:adotei/app_controller.dart';
 import 'package:adotei/custom_colors.dart';
 import 'package:adotei/custom_icons.dart';
 import 'package:adotei/gender.dart';
@@ -48,6 +49,17 @@ class _AddPetState extends State<AddPet> {
   String? textButton = 'Classificação';
 
   List<MyAnimal> animal = [];
+
+  void clearFields() {
+    setState(() {
+      nameController.clear();
+      descriptionController.clear();
+      ageController.text = "1 anos";
+      _gender = null;
+      _animal = null;
+      textButton = 'Classificação';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -200,6 +212,7 @@ class _AddPetState extends State<AddPet> {
                       enabled: false,
                       keyboardType: TextInputType.number,
                       controller: ageController,
+                      textAlign: TextAlign.center,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(borderSide: BorderSide.none),
                         fillColor: CustomColors.white,
@@ -258,15 +271,13 @@ class _AddPetState extends State<AddPet> {
                   ),
                 ],
               ),
-              buildTextField('Descrição', 300, 10, descriptionController),
+              buildTextField('Descrição', 100, 10, descriptionController),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
                   onPressed: () {
                     String name = nameController.text;
-                    String animal;
                     int age = _age;
-                    String gender;
                     String description = descriptionController.text;
 
                     if (name.isEmpty || description.isEmpty) {
@@ -279,34 +290,17 @@ class _AddPetState extends State<AddPet> {
                       errorText = null;
                     });
 
-                    switch (_animal) {
-                      case (Animal.cat):
-                        animal = 'Gato';
-                        break;
-                      case (Animal.dog):
-                        animal = 'Cachorro';
-                        break;
-                      default:
-                        animal = 'Indefinido';
-                        break;
-                    }
-
-                    if (_gender == Gender.male) {
-                      gender = 'Macho';
-                    } else {
-                      gender = 'Fêmea';
-                    }
-
                     MyAnimal myanimal = MyAnimal(
                       1,
-                      animal,
+                      _animal!,
                       name,
                       age,
-                      gender,
+                      _gender!,
                       description,
                     );
 
-                    this.animal.add(myanimal);
+                    AppController.getInstance.animal.add(myanimal);
+                    clearFields();
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(15.0),
